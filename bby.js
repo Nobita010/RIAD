@@ -1,4 +1,5 @@
 const axios = require("axios");
+
 const baseApiUrl = async () => {
   const base = await axios.get(
     `https://raw.githubusercontent.com/Nobita010/RIAD/main/baseApiUrl.json`,
@@ -19,8 +20,8 @@ const languagesMap = {
   vi: "vietnamese"
 };
 
-// Default language set Bangla
-const shortLang = "bn"; 
+// Default language set to Bangla
+const shortLang = "bn";
 
 // You can change this language to your preferred language code
 // Example:
@@ -33,19 +34,17 @@ module.exports.config = {
   name: "bby",
   version: "1.0.0",
   role: 0,
-  author: "RIAD",
-  description: "better then all Sim simi with multiple conversation",
+  author: "MD RIAD",
+  description: "better than all Sim simi with multiple conversation",
   guide: { en: "[message]" },
   category: "ChatBots",
   coolDowns: 5,
 };
+
 module.exports.onReply = async function ({ api, event }) {
   if (event.type == "message_reply") {
     const reply = event.body.toLowerCase();
     if (isNaN(reply)) {
-      /*const response = await axios.get(
-        `${await baseApiUrl()}/baby?text=${encodeURIComponent(reply)}&language=${lang}`,
-      );*/
       const response = await axios.get(
         `${await baseApiUrl()}/baby?text=${encodeURIComponent(reply)}`,
       );
@@ -67,6 +66,7 @@ module.exports.onReply = async function ({ api, event }) {
     }
   }
 };
+
 module.exports.onStart = async function ({ api, args, event }) {
   try {
     const dipto = args.join(" ").toLowerCase();
@@ -79,9 +79,6 @@ module.exports.onStart = async function ({ api, args, event }) {
       return;
     }
     if (dipto) {
-    /*const response = await axios.get(
-        `${await baseApiUrl()}/baby?text=${dipto}&language=${lang}`,
-      );*/
       const response = await axios.get(
         `${await baseApiUrl()}/baby?text=${dipto}`,
       );
